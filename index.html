@@ -21,6 +21,8 @@
       --muted-text: #777;
       --shadow: rgba(0,0,0,0.10);
       --focus-ring: rgba(142,108,136,0.18);
+      --error: #d32f2f;
+      --warning: #f57c00;
 
       /* variables de layout (homologadas con Batman template) */
       --max-width: 1000px;
@@ -38,6 +40,35 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       -webkit-text-size-adjust:100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Efectos decorativos de fondo */
+    .decoration {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.08;
+    }
+    .decoration.circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      top: 10%;
+      right: 10%;
+    }
+    .decoration.flower {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, var(--accent) 20%, transparent 20%),
+                  radial-gradient(circle, transparent 20%, var(--accent) 20%, transparent 30%),
+                  radial-gradient(circle, var(--accent) 10%, transparent 10%);
+      background-size: 20px 20px, 40px 40px, 20px 20px;
+      background-position: 0 0, 20px 20px, 0 40px;
+      bottom: 15%;
+      left: 8%;
+      transform: rotate(25deg);
     }
 
     /* container homologado */
@@ -48,11 +79,25 @@
       background:var(--card-bg);
       text-align:center;
       box-shadow:0 6px 18px var(--shadow);
+      position: relative;
+      z-index: 1;
     }
 
     .header-section{
       padding:20px 16px 6px;
       background: linear-gradient(to bottom, var(--bg), var(--card-bg) 30%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--accent), var(--map-btn), var(--accent));
     }
 
     .invitation-heading{
@@ -61,10 +106,42 @@
       text-transform:uppercase;
       color:var(--accent);
       margin-bottom:6px;
+      position: relative;
+      display: inline-block;
     }
 
-    .event-title .first-word{ font-family:'Parisienne',cursive; font-size:50px; color:var(--accent); display:block; line-height:1 }
-    .event-title .second-word{ font-family:'Parisienne',cursive; font-size:36px; color:var(--accent); display:block; margin-top:-8px }
+    .invitation-heading::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 25%;
+      right: 25%;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .event-title {
+      position: relative;
+      margin: 10px 0;
+    }
+
+    .event-title .first-word{ 
+      font-family:'Parisienne',cursive; 
+      font-size:50px; 
+      color:var(--accent); 
+      display:block; 
+      line-height:1;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .event-title .second-word{ 
+      font-family:'Parisienne',cursive; 
+      font-size:36px; 
+      color:var(--accent); 
+      display:block; 
+      margin-top:-8px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
 
     .communion-image{
       width:85%;
@@ -76,6 +153,14 @@
       box-shadow:0 6px 20px var(--shadow);
       display:block;
       loading: lazy;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid var(--card-bg);
+      outline: 1px solid var(--muted);
+    }
+
+    .communion-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
 
     .child-name{
@@ -84,9 +169,25 @@
       color:var(--accent);
       margin:6px 0 10px;
       line-height:1.05;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+      position: relative;
+      display: inline-block;
     }
 
-    .content-section{ padding:0 16px 36px }
+    .child-name::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+
+    .content-section{ 
+      padding:0 16px 36px;
+      animation: fadeIn 1s ease-out 0.6s both;
+    }
 
     .event-date{
       font-size:15px;
@@ -99,6 +200,8 @@
       max-width:90%;
       margin:18px auto;
       letter-spacing:0.5px;
+      position: relative;
+      background: linear-gradient(to right, transparent, rgba(142,108,136,0.05), transparent);
     }
 
     /* Centrado aplicado: homologado para el template Batman */
@@ -110,13 +213,63 @@
       border-top:1px solid var(--muted);
       border-bottom:1px solid var(--muted);
       border-radius:10px;
-      text-align:center;              /* <-- centrado */
+      text-align:center;
       display:block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .event-type{ font-weight:600; font-size:14px; color:#3a2e3a; margin-bottom:6px }
-    .event-time{ font-size:14px; color:#5a5a5a; margin-bottom:8px }
-    .event-location{ font-style:italic; font-size:13px; color:var(--muted-text); line-height:1.4; white-space:pre-line; text-align:center; /* <-- centrado */ }
+    .event-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .event-type{ 
+      font-weight:600; 
+      font-size:14px; 
+      color:#3a2e3a; 
+      margin-bottom:6px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .event-type::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .event-time{ 
+      font-size:14px; 
+      color:#5a5a5a; 
+      margin-bottom:8px;
+      font-weight: 500;
+    }
+
+    .event-location{ 
+      font-style:italic; 
+      font-size:13px; 
+      color:var(--muted-text); 
+      line-height:1.4; 
+      white-space:pre-line; 
+      text-align:center;
+    }
 
     .map-button, .confirm-button{
       display:inline-block;
@@ -131,18 +284,70 @@
       min-width:160px;
       text-decoration:none;
       color:#fff;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
-    .map-button{ background:var(--map-btn) }
-    .map-button:hover{ transform:translateY(-2px) }
-    .confirm-button{ background:var(--accent-2); margin-bottom:30px }
-    .confirm-button:hover{ transform:translateY(-2px) }
+
+    .map-button::before, .confirm-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+      z-index: -1;
+    }
+
+    .map-button:hover::before, .confirm-button:hover::before {
+      left: 100%;
+    }
+
+    .map-button{ 
+      background:var(--map-btn);
+      box-shadow: 0 3px 8px rgba(107,142,122,0.3);
+    }
+    .map-button:hover{ 
+      transform:translateY(-2px);
+      box-shadow: 0 5px 12px rgba(107,142,122,0.4);
+    }
+    
+    .confirm-button{ 
+      background:var(--accent-2); 
+      margin-bottom:30px;
+      box-shadow: 0 3px 8px rgba(142,108,136,0.3);
+    }
+    .confirm-button:hover{ 
+      transform:translateY(-2px);
+      box-shadow: 0 5px 12px rgba(142,108,136,0.4);
+    }
 
     /* Modal homologado (misma estructura que Batman template) */
-    .modal{ position:fixed; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:1000; opacity:0; pointer-events:none; transition:opacity .25s ease }
-    .modal.active{ opacity:1; pointer-events:all }
+    .modal{ 
+      position:fixed; 
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      background:rgba(0,0,0,0.45); 
+      z-index:1000; 
+      opacity:0; 
+      pointer-events:none; 
+      transition:opacity .25s ease;
+    }
+    .modal.active{ 
+      opacity:1; 
+      pointer-events:all;
+    }
     .modal-content{
       position:relative;
-      width:92%; max-width:360px;
+      width:92%; 
+      max-width:400px;
       background:var(--card-bg);
       padding:20px;
       border-radius:12px;
@@ -150,45 +355,208 @@
       border-top:3px solid var(--accent);
       transform:translateY(16px);
       transition:transform .25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
     }
-    .modal.active .modal-content{ transform:translateY(0) }
+    .modal.active .modal-content{ 
+      transform:translateY(0);
+    }
 
     .close-modal{
-      position:absolute; top:10px; right:10px;
-      width:34px; height:34px; border-radius:6px;
-      display:flex; align-items:center; justify-content:center;
-      background:transparent; border:none; cursor:pointer;
-      color:var(--accent); font-size:18px; padding:0; z-index:3;
+      position:absolute; 
+      top:10px; 
+      right:10px;
+      width:34px; 
+      height:34px; 
+      border-radius:6px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      background:transparent; 
+      border:none; 
+      cursor:pointer;
+      color:var(--accent); 
+      font-size:18px; 
+      padding:0; 
+      z-index:3;
+      transition: background 0.2s;
     }
 
-    .modal-title{ font-family:'Parisienne',cursive; color:var(--accent); font-size:22px; margin:0 0 12px; text-align:center }
-
-    .form-group{ margin-bottom:12px; text-align:left }
-    .form-label{ display:block; margin-bottom:6px; font-size:13px; color:#5a4a5a; font-weight:500 }
-    .modal-content input[type="text"], .modal-content input[type="number"]{
-      width:100%; padding:10px 12px; border-radius:8px; border:1px solid #e0d5c8; background:#f9f5f1; font-size:14px;
+    .close-modal:hover {
+      background: rgba(142,108,136,0.1);
     }
-    .modal-content input:focus{ outline:none; box-shadow:0 0 0 6px var(--focus-ring); border-color:var(--accent) }
 
-    .submit-btn{ width:100%; padding:12px; border-radius:20px; border:none; background:var(--accent-2); color:#fff; font-weight:600; cursor:pointer; margin-top:6px }
-    .submit-btn[disabled]{ opacity:0.6; cursor:not-allowed }
+    .modal-title{ 
+      font-family:'Parisienne',cursive; 
+      color:var(--accent); 
+      font-size:22px; 
+      margin:0 0 12px; 
+      text-align:center;
+    }
 
-    .loading-spinner{ display:none; width:24px; height:24px; margin:10px auto; border:3px solid rgba(142,108,136,0.28); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite }
-    @keyframes spin{ to { transform:rotate(360deg) } }
+    .form-group{ 
+      margin-bottom:12px; 
+      text-align:left;
+      position: relative;
+    }
+    .form-label{ 
+      display:block; 
+      margin-bottom:6px; 
+      font-size:13px; 
+      color:#5a4a5a; 
+      font-weight:500;
+    }
+    .modal-content input[type="text"], 
+    .modal-content input[type="number"],
+    .modal-content input[type="email"],
+    .modal-content input[type="tel"] {
+      width:100%; 
+      padding:10px 12px; 
+      border-radius:8px; 
+      border:1px solid #e0d5c8; 
+      background:#f9f5f1; 
+      font-size:14px;
+      transition: all 0.2s;
+    }
+    .modal-content input:focus{ 
+      outline:none; 
+      box-shadow:0 0 0 6px var(--focus-ring); 
+      border-color:var(--accent);
+    }
+    
+    .modal-content input.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 6px rgba(211, 47, 47, 0.1);
+    }
+    
+    .modal-content input.warning {
+      border-color: var(--warning);
+      box-shadow: 0 0 0 6px rgba(245, 124, 0, 0.1);
+    }
+    
+    .error-message {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    
+    .warning-message {
+      color: var(--warning);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
 
-    .success{ font-family:'Parisienne',cursive; font-size:20px; color:var(--accent); text-align:center; display:none; margin-top:12px }
+    .submit-btn{ 
+      width:100%; 
+      padding:12px; 
+      border-radius:20px; 
+      border:none; 
+      background:var(--accent-2); 
+      color:#fff; 
+      font-weight:600; 
+      cursor:pointer; 
+      margin-top:6px;
+      transition: all 0.2s;
+    }
+    .submit-btn:hover:not([disabled]) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(142,108,136,0.4);
+    }
+    .submit-btn[disabled]{ 
+      opacity:0.6; 
+      cursor:not-allowed;
+    }
 
-    footer{ text-align:center; padding:12px 6px; font-size:12px; color:#999; background:transparent }
+    .loading-spinner{ 
+      display:none; 
+      width:24px; 
+      height:24px; 
+      margin:10px auto; 
+      border:3px solid rgba(142,108,136,0.28); 
+      border-top-color:var(--accent); 
+      border-radius:50%; 
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin{ 
+      to { 
+        transform:rotate(360deg); 
+      } 
+    }
 
-    :focus{ outline:3px solid var(--focus-ring); outline-offset:2px }
+    .success{ 
+      font-family:'Parisienne',cursive; 
+      font-size:20px; 
+      color:var(--accent); 
+      text-align:center; 
+      display:none; 
+      margin-top:12px;
+      animation: pulse 1.5s infinite;
+    }
+
+    footer{ 
+      text-align:center; 
+      padding:12px 6px; 
+      font-size:12px; 
+      color:#999; 
+      background:transparent;
+      border-top: 1px solid var(--muted);
+    }
+
+    :focus{ 
+      outline:3px solid var(--focus-ring); 
+      outline-offset:2px;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
 
     @media (max-width:420px){
-      .modal-content{ padding:16px; max-width:320px }
-      .child-name{ font-size:40px }
+      .modal-content{ 
+        padding:16px; 
+        max-width:320px;
+      }
+      .child-name{ 
+        font-size:40px;
+      }
+      .event-title .first-word {
+        font-size: 42px;
+      }
+      .event-title .second-word {
+        font-size: 30px;
+      }
+      .decoration {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Elementos decorativos de fondo -->
+  <div class="decoration circle"></div>
+  <div class="decoration flower"></div>
+
   <div class="invitation-container">
     <div class="header-section" role="banner">
       <div class="invitation-heading">Acompáñame a celebrar mi</div>
@@ -232,16 +600,32 @@
         <div class="form-group">
           <label for="name" class="form-label">Nombre(s) y apellido(s):</label>
           <input id="name" name="name" type="text" autocomplete="name" required />
+          <div class="error-message" id="nameError">Por favor ingresa tu nombre completo (mínimo 3 caracteres)</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Correo electrónico:</label>
+          <input id="email" name="email" type="email" autocomplete="email" />
+          <div class="error-message" id="emailError">Por favor ingresa un correo electrónico válido</div>
+          <div class="warning-message" id="emailDuplicateError">Este correo electrónico ya ha confirmado asistencia</div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">Número telefónico:</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(XX) XXXX-XXXX" />
+          <div class="error-message" id="phoneError">Por favor ingresa un número telefónico válido (10 dígitos)</div>
         </div>
 
         <div class="form-group">
           <label for="adults" class="form-label">Número de adultos:</label>
           <input id="adults" name="adults" type="number" min="1" value="1" required />
+          <div class="error-message" id="adultsError">Debe haber al menos 1 adulto</div>
         </div>
 
         <div class="form-group">
           <label for="children" class="form-label">Número de niños:</label>
           <input id="children" name="children" type="number" min="0" value="0" required />
+          <div class="error-message" id="childrenError">El número de niños no puede ser negativo</div>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">Enviar confirmación</button>
@@ -274,7 +658,10 @@
 
     window.addEventListener('load', () => {
       if (window.firebase && firebase.initializeApp) {
-        try { firebase.initializeApp(firebaseConfig); window.db = firebase.firestore(); }
+        try { 
+          firebase.initializeApp(firebaseConfig); 
+          window.db = firebase.firestore(); 
+        }
         catch(e) { console.warn('Firebase init:', e); }
       } else console.warn('Firebase no cargó correctamente.');
 
@@ -293,14 +680,155 @@
       const thankYou = document.getElementById('thankYouMessage');
       let previousFocus = null;
 
+      // Elementos del formulario
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const adultsInput = document.getElementById('adults');
+      const childrenInput = document.getElementById('children');
+      
+      // Mensajes de error
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const emailDuplicateError = document.getElementById('emailDuplicateError');
+      const phoneError = document.getElementById('phoneError');
+      const adultsError = document.getElementById('adultsError');
+      const childrenError = document.getElementById('childrenError');
+
+      // Función para validar email
+      function isValidEmail(email) {
+        if (!email) return true; // Email es opcional
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Función para validar teléfono (formato mexicano: 10 dígitos)
+      function isValidPhone(phone) {
+        if (!phone) return true; // Teléfono es opcional
+        // Remover caracteres no numéricos
+        const cleanPhone = phone.replace(/\D/g, '');
+        return cleanPhone.length === 10;
+      }
+
+      // Función para formatear teléfono con nueva máscara (XX) XXXX-XXXX
+      function formatPhoneNumber(value) {
+        // Remover todo excepto números
+        const numbers = value.replace(/\D/g, '');
+        
+        // Aplicar formato (XX) XXXX-XXXX
+        if (numbers.length <= 2) {
+          return numbers;
+        } else if (numbers.length <= 6) {
+          return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+        } else {
+          return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 6)}-${numbers.slice(6, 10)}`;
+        }
+      }
+
+      // Función para verificar si el correo ya existe en la base de datos
+      async function checkEmailExists(email) {
+        if (!email || !isValidEmail(email)) return false;
+        
+        try {
+          const snapshot = await db.collection('jimenalopezgaona_panel')
+            .where('email', '==', email.toLowerCase().trim())
+            .get();
+          
+          return !snapshot.empty;
+        } catch (error) {
+          console.error('Error al verificar correo:', error);
+          return false;
+        }
+      }
+
+      // Event listener para formatear teléfono en tiempo real
+      phoneInput.addEventListener('input', function(e) {
+        const formatted = formatPhoneNumber(e.target.value);
+        e.target.value = formatted;
+        
+        // Validar y mostrar/ocultar error
+        if (e.target.value && !isValidPhone(e.target.value)) {
+          phoneError.style.display = 'block';
+          e.target.classList.add('error');
+        } else {
+          phoneError.style.display = 'none';
+          e.target.classList.remove('error');
+        }
+      });
+
+      // Validación en tiempo real para email
+      emailInput.addEventListener('blur', async function(e) {
+        const email = e.target.value.trim();
+        
+        if (email && !isValidEmail(email)) {
+          emailError.style.display = 'block';
+          emailDuplicateError.style.display = 'none';
+          e.target.classList.add('error');
+          e.target.classList.remove('warning');
+          return;
+        }
+        
+        if (email && isValidEmail(email)) {
+          const emailExists = await checkEmailExists(email);
+          if (emailExists) {
+            emailDuplicateError.style.display = 'block';
+            emailError.style.display = 'none';
+            e.target.classList.add('warning');
+            e.target.classList.remove('error');
+          } else {
+            emailDuplicateError.style.display = 'none';
+            emailError.style.display = 'none';
+            e.target.classList.remove('error', 'warning');
+          }
+        } else {
+          emailError.style.display = 'none';
+          emailDuplicateError.style.display = 'none';
+          e.target.classList.remove('error', 'warning');
+        }
+      });
+
+      // Validación en tiempo real para nombre
+      nameInput.addEventListener('blur', function(e) {
+        if (e.target.value.length < 3) {
+          nameError.style.display = 'block';
+          e.target.classList.add('error');
+        } else {
+          nameError.style.display = 'none';
+          e.target.classList.remove('error');
+        }
+      });
+
+      // Validación en tiempo real para adultos
+      adultsInput.addEventListener('blur', function(e) {
+        if (e.target.value < 1) {
+          adultsError.style.display = 'block';
+          e.target.classList.add('error');
+        } else {
+          adultsError.style.display = 'none';
+          e.target.classList.remove('error');
+        }
+      });
+
+      // Validación en tiempo real para niños
+      childrenInput.addEventListener('blur', function(e) {
+        if (e.target.value < 0) {
+          childrenError.style.display = 'block';
+          e.target.classList.add('error');
+        } else {
+          childrenError.style.display = 'none';
+          e.target.classList.remove('error');
+        }
+      });
+
       function openModal(){
         previousFocus = document.activeElement;
         modal.classList.add('active');
         modal.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
-        setTimeout(()=>{ document.getElementById('name')?.focus(); }, 50);
+        setTimeout(()=>{ nameInput.focus(); }, 50);
         document.addEventListener('keydown', handleKey);
       }
+      
       function closeModal(){
         modal.classList.remove('active');
         modal.setAttribute('aria-hidden','true');
@@ -310,14 +838,24 @@
           thankYou.style.display = 'none';
           form.style.display = '';
           form.reset();
-          document.getElementById('adults').value = 1;
-          document.getElementById('children').value = 0;
+          adultsInput.value = 1;
+          childrenInput.value = 0;
+          
+          // Limpiar errores
+          [nameError, emailError, emailDuplicateError, phoneError, adultsError, childrenError].forEach(error => {
+            error.style.display = 'none';
+          });
+          [nameInput, emailInput, phoneInput, adultsInput, childrenInput].forEach(input => {
+            input.classList.remove('error', 'warning');
+          });
+          
           submitBtn.disabled = false;
           submitBtn.textContent = 'Enviar confirmación';
           loadingSpinner.style.display = 'none';
           previousFocus?.focus?.();
         }, 200);
       }
+      
       function handleKey(e){ if (e.key === 'Escape') closeModal(); }
 
       modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
@@ -327,25 +865,80 @@
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         if (!window.db) { alert('Base de datos no disponible.'); return; }
+        
+        // Validar todos los campos
+        let isValid = true;
+        
+        // Validar nombre
+        if (nameInput.value.length < 3) {
+          nameError.style.display = 'block';
+          nameInput.classList.add('error');
+          isValid = false;
+        }
+        
+        // Validar email
+        const email = emailInput.value.trim();
+        if (email && !isValidEmail(email)) {
+          emailError.style.display = 'block';
+          emailInput.classList.add('error');
+          isValid = false;
+        }
+        
+        // Verificar si el correo ya existe
+        if (email && isValidEmail(email)) {
+          const emailExists = await checkEmailExists(email);
+          if (emailExists) {
+            emailDuplicateError.style.display = 'block';
+            emailInput.classList.add('warning');
+            isValid = false;
+          }
+        }
+        
+        // Validar teléfono
+        if (phoneInput.value && !isValidPhone(phoneInput.value)) {
+          phoneError.style.display = 'block';
+          phoneInput.classList.add('error');
+          isValid = false;
+        }
+        
+        // Validar adultos
+        if (adultsInput.value < 1) {
+          adultsError.style.display = 'block';
+          adultsInput.classList.add('error');
+          isValid = false;
+        }
+        
+        // Validar niños
+        if (childrenInput.value < 0) {
+          childrenError.style.display = 'block';
+          childrenInput.classList.add('error');
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          alert('Por favor corrige los errores en el formulario');
+          return;
+        }
+        
         submitBtn.disabled = true;
         submitBtn.textContent = 'Enviando...';
         loadingSpinner.style.display = 'block';
 
-        const name = (document.getElementById('name').value || '').trim();
-        const adults = Number(document.getElementById('adults').value) || 0;
-        const children = Number(document.getElementById('children').value) || 0;
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value;
+        const adults = Number(adultsInput.value) || 0;
+        const children = Number(childrenInput.value) || 0;
         const userAgent = navigator.userAgent || '';
         const screenSize = `${window.innerWidth}x${window.innerHeight}`;
 
-        if (name.length < 3) { alert('Por favor ingresa tu nombre completo'); submitBtn.disabled=false; submitBtn.textContent='Enviar confirmación'; loadingSpinner.style.display='none'; return; }
-        if (adults < 1) { alert('Debe haber al menos 1 adulto'); submitBtn.disabled=false; submitBtn.textContent='Enviar confirmación'; loadingSpinner.style.display='none'; return; }
-        if (children < 0) { alert('El número de niños no puede ser negativo'); submitBtn.disabled=false; submitBtn.textContent='Enviar confirmación'; loadingSpinner.style.display='none'; return; }
-
         try {
-          await db.collection('confirmaciones').add({
+          // Guardar en la colección jimenalopezgaona_panel
+          await db.collection('jimenalopezgaona_panel').add({
             nombre: name,
+            email: email || 'No proporcionado',
+            telefono: phone || 'No proporcionado',
             adultos: adults,
-            ninos: children,    // campo homogéneo con panel
+            ninos: children,
             dispositivo: userAgent,
             pantalla: screenSize,
             fecha: new Date().toLocaleString('es-MX'),
