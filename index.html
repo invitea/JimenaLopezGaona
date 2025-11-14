@@ -271,7 +271,7 @@
       text-align:center;
     }
 
-    .map-button, .confirm-button{
+    .map-button, .confirm-button, .gift-button{
       display:inline-block;
       margin:10px auto;
       padding:12px 25px;
@@ -289,7 +289,7 @@
       z-index: 1;
     }
 
-    .map-button::before, .confirm-button::before {
+    .map-button::before, .confirm-button::before, .gift-button::before {
       content: "";
       position: absolute;
       top: 0;
@@ -301,15 +301,15 @@
       z-index: -1;
     }
 
-    .map-button:hover::before, .confirm-button:hover::before {
+    .map-button:hover::before, .confirm-button:hover::before, .gift-button:hover::before {
       left: 100%;
     }
 
-    .map-button{ 
+    .map-button, .gift-button { 
       background:var(--map-btn);
       box-shadow: 0 3px 8px rgba(107,142,122,0.3);
     }
-    .map-button:hover{ 
+    .map-button:hover, .gift-button:hover { 
       transform:translateY(-2px);
       box-shadow: 0 5px 12px rgba(107,142,122,0.4);
     }
@@ -584,6 +584,13 @@
         <div class="event-time">15:00 hrs</div>
         <div class="event-location">Salón de Fiestas "El Arca de los Niños"<br/>5 de Mayo núm. 31, Col. Los Reyes Culhuacán,<br/>Iztapalapa, Ciudad de México, CDMX</div>
         <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=El%20Arca%20de%20los%20Ni%C3%B1os%2C%205%20de%20Mayo%20n%C3%BAm.%2031%2C%20Col.%20Los%20Reyes%20Culhuac%C3%A1n%2C%20Iztapalapa%2C%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+      </div>
+
+      <!-- Nueva sección: Mesa de Regalos -->
+      <div class="event-card" aria-labelledby="regalos">
+        <div id="regalos" class="event-type">Mesa de Regalos</div>
+        <div class="event-location">Si deseas tener un detalle conmigo, puedes visitar mi mesa de regalos en Liverpool</div>
+        <a class="gift-button" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51780014" target="_blank" rel="noopener noreferrer">Ver Regalos</a>
       </div>
 
       <button class="confirm-button" id="openRsvp" aria-haspopup="dialog">Confirma asistencia</button>
