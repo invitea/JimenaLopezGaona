@@ -23,6 +23,7 @@
       --focus-ring: rgba(142,108,136,0.18);
       --error: #d32f2f;
       --warning: #f57c00;
+      --success: #388e3c;
 
       /* variables de layout (homologadas con Batman template) */
       --max-width: 1000px;
@@ -488,7 +489,7 @@
     .success{ 
       font-family:'Parisienne',cursive; 
       font-size:20px; 
-      color:var(--accent); 
+      color:var(--success); 
       text-align:center; 
       display:none; 
       margin-top:12px;
@@ -663,7 +664,16 @@
       measurementId: "G-8JS1MDZVGQ"
     };
 
+    // Preload de imagen para mejor rendimiento
+    function preloadImage(url) {
+      const img = new Image();
+      img.src = url;
+    }
+
     window.addEventListener('load', () => {
+      // Preload de la imagen principal
+      preloadImage('https://i.ibb.co/MyswS4v6/image.jpg');
+      
       if (window.firebase && firebase.initializeApp) {
         try { 
           firebase.initializeApp(firebaseConfig); 
@@ -748,6 +758,20 @@
         }
       }
 
+      // Función para mostrar errores de forma más clara
+      function showError(input, errorElement, message) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        input.classList.add('error');
+        input.focus();
+      }
+
+      // Función para limpiar errores
+      function clearError(input, errorElement) {
+        errorElement.style.display = 'none';
+        input.classList.remove('error', 'warning');
+      }
+
       // Event listener para formatear teléfono en tiempo real
       phoneInput.addEventListener('input', function(e) {
         const formatted = formatPhoneNumber(e.target.value);
@@ -755,11 +779,9 @@
         
         // Validar y mostrar/ocultar error
         if (e.target.value && !isValidPhone(e.target.value)) {
-          phoneError.style.display = 'block';
-          e.target.classList.add('error');
+          showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
         } else {
-          phoneError.style.display = 'none';
-          e.target.classList.remove('error');
+          clearError(phoneInput, phoneError);
         }
       });
 
@@ -768,10 +790,8 @@
         const email = e.target.value.trim();
         
         if (email && !isValidEmail(email)) {
-          emailError.style.display = 'block';
+          showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
           emailDuplicateError.style.display = 'none';
-          e.target.classList.add('error');
-          e.target.classList.remove('warning');
           return;
         }
         
@@ -780,50 +800,42 @@
           if (emailExists) {
             emailDuplicateError.style.display = 'block';
             emailError.style.display = 'none';
-            e.target.classList.add('warning');
-            e.target.classList.remove('error');
+            emailInput.classList.add('warning');
+            emailInput.classList.remove('error');
           } else {
+            clearError(emailInput, emailError);
             emailDuplicateError.style.display = 'none';
-            emailError.style.display = 'none';
-            e.target.classList.remove('error', 'warning');
           }
         } else {
-          emailError.style.display = 'none';
+          clearError(emailInput, emailError);
           emailDuplicateError.style.display = 'none';
-          e.target.classList.remove('error', 'warning');
         }
       });
 
       // Validación en tiempo real para nombre
       nameInput.addEventListener('blur', function(e) {
         if (e.target.value.length < 3) {
-          nameError.style.display = 'block';
-          e.target.classList.add('error');
+          showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
         } else {
-          nameError.style.display = 'none';
-          e.target.classList.remove('error');
+          clearError(nameInput, nameError);
         }
       });
 
       // Validación en tiempo real para adultos
       adultsInput.addEventListener('blur', function(e) {
         if (e.target.value < 1) {
-          adultsError.style.display = 'block';
-          e.target.classList.add('error');
+          showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
         } else {
-          adultsError.style.display = 'none';
-          e.target.classList.remove('error');
+          clearError(adultsInput, adultsError);
         }
       });
 
       // Validación en tiempo real para niños
       childrenInput.addEventListener('blur', function(e) {
         if (e.target.value < 0) {
-          childrenError.style.display = 'block';
-          e.target.classList.add('error');
+          showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
         } else {
-          childrenError.style.display = 'none';
-          e.target.classList.remove('error');
+          clearError(childrenInput, childrenError);
         }
       });
 
@@ -863,7 +875,27 @@
         }, 200);
       }
       
-      function handleKey(e){ if (e.key === 'Escape') closeModal(); }
+      function handleKey(e){ 
+        if (e.key === 'Escape') closeModal(); 
+        // Mejor navegación por teclado en el modal
+        if (e.key === 'Tab' && modal.classList.contains('active')) {
+          const focusableElements = modal.querySelectorAll('button, input, textarea, select, a[href]');
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+          
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
 
       modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
       openBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
@@ -871,23 +903,24 @@
 
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        if (!window.db) { alert('Base de datos no disponible.'); return; }
+        if (!window.db) { 
+          alert('Base de datos no disponible. Por favor, intenta más tarde.'); 
+          return; 
+        }
         
         // Validar todos los campos
         let isValid = true;
         
         // Validar nombre
         if (nameInput.value.length < 3) {
-          nameError.style.display = 'block';
-          nameInput.classList.add('error');
+          showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
           isValid = false;
         }
         
         // Validar email
         const email = emailInput.value.trim();
         if (email && !isValidEmail(email)) {
-          emailError.style.display = 'block';
-          emailInput.classList.add('error');
+          showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
           isValid = false;
         }
         
@@ -896,6 +929,7 @@
           const emailExists = await checkEmailExists(email);
           if (emailExists) {
             emailDuplicateError.style.display = 'block';
+            emailError.style.display = 'none';
             emailInput.classList.add('warning');
             isValid = false;
           }
@@ -903,27 +937,26 @@
         
         // Validar teléfono
         if (phoneInput.value && !isValidPhone(phoneInput.value)) {
-          phoneError.style.display = 'block';
-          phoneInput.classList.add('error');
+          showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
           isValid = false;
         }
         
         // Validar adultos
         if (adultsInput.value < 1) {
-          adultsError.style.display = 'block';
-          adultsInput.classList.add('error');
+          showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
           isValid = false;
         }
         
         // Validar niños
         if (childrenInput.value < 0) {
-          childrenError.style.display = 'block';
-          childrenInput.classList.add('error');
+          showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
           isValid = false;
         }
         
         if (!isValid) {
-          alert('Por favor corrige los errores en el formulario');
+          // Enfocar el primer campo con error
+          const firstError = form.querySelector('.error, .warning');
+          if (firstError) firstError.focus();
           return;
         }
         
@@ -954,22 +987,29 @@
           form.style.display = 'none';
           thankYou.style.display = 'block';
           loadingSpinner.style.display = 'none';
-          setTimeout(closeModal, 1400);
+          setTimeout(closeModal, 1800);
         } catch(err){
           console.error('Error al guardar en Firebase:', err);
-          alert('Ocurrió un error al guardar. Intenta nuevamente.');
+          alert('Ocurrió un error al guardar. Por favor, intenta nuevamente.');
           submitBtn.disabled=false;
           submitBtn.textContent='Enviar confirmación';
           loadingSpinner.style.display='none';
         }
       });
 
-      // helpers mobile
+      // Mejor experiencia móvil
       document.addEventListener('DOMContentLoaded', ()=>{
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input=>{
           input.addEventListener('touchstart', (ev)=>ev.stopPropagation(), { passive: true });
-          input.addEventListener('focus', ()=> input.scrollIntoView({ behavior:'smooth', block:'center' }));
+          input.addEventListener('focus', ()=> {
+            // Scroll suave para inputs en móvil
+            if (window.innerWidth < 768) {
+              setTimeout(() => {
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }, 300);
+            }
+          });
         });
       });
     })();
