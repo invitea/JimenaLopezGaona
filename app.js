@@ -1,7 +1,7 @@
 const EVENT_DATE_TEXT = 'Lunes 18 de Mayo';
 
 // Fecha del evento: 18 de mayo de 2026
-// Mes en JavaScript: enero = 0, mayo = 4
+// En JavaScript: enero = 0, mayo = 4
 const EVENT_DATE = new Date(2026, 4, 18, 0, 0, 0);
 
 function setFixedDate() {
@@ -65,6 +65,5 @@ function updateCountdown() {
 document.addEventListener('DOMContentLoaded', function() {
   setFixedDate();
   updateCountdown();
-
   setInterval(updateCountdown, 1000);
 });
