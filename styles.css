@@ -47,7 +47,6 @@ header {
   margin: 0 auto;
 }
 
-/* Logo link */
 .logo-link {
   text-decoration: none;
   display: block;
@@ -118,6 +117,7 @@ header {
   height: 16px;
 }
 
+/* Contenedor principal */
 .invitation-container {
   max-width: 100%;
   margin: 0 auto;
@@ -254,41 +254,52 @@ header {
 }
 
 /* Cuenta Regresiva */
-.countdown-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 20px auto 10px;
-  max-width: 420px;
+.event-card .countdown-container {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  margin: 22px auto 12px;
+  align-items: stretch;
 }
 
-.countdown-item {
+.event-card .countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
   border: 2px solid #000;
-  border-radius: 12px;
-  padding: 12px 6px;
-  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.25);
+  border-radius: 14px;
+  padding: 14px 8px;
+
+  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.28);
+  min-height: 86px;
 }
 
-.countdown-value {
-  font-size: 1.8rem;
+.event-card .countdown-value {
+  display: block;
+  font-size: 2rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1;
   text-shadow: 2px 2px 0 #000;
 }
 
-.countdown-label {
+.event-card .countdown-label {
+  display: block;
   font-size: 0.72rem;
   font-weight: 800;
   color: #ffd21a;
-  margin-top: 6px;
+  margin-top: 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-shadow: 1px 1px 0 #000;
 }
 
-.countdown-message {
+.event-card .countdown-message {
   margin-top: 18px;
   font-size: 1rem;
   font-weight: 800;
@@ -376,6 +387,38 @@ footer {
   text-decoration: underline;
 }
 
+/* Botón de música */
+.music-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 100;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #000;
+
+  background: linear-gradient(180deg, #ffd21a 0%, #ff9d00 100%);
+  color: #000;
+  font-size: 1.35rem;
+  cursor: pointer;
+
+  box-shadow: 0 4px 0 #000, 0 8px 16px rgba(0,0,0,0.35);
+  transition: all 0.3s ease;
+}
+
+.music-button:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 4px 0 #000, 0 0 18px rgba(255, 210, 26, 0.8);
+}
+
+.music-button.playing {
+  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
+  color: #ffffff;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .title-section h1 { 
@@ -416,20 +459,30 @@ footer {
     font-size: 14px; 
   }
 
-  .countdown-container {
-    gap: 8px;
+  .event-card .countdown-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 280px;
   }
 
-  .countdown-item {
-    padding: 10px 4px;
-    border-radius: 10px;
+  .event-card .countdown-item {
+    padding: 12px 6px;
+    min-height: 78px;
   }
 
-  .countdown-value {
-    font-size: 1.35rem;
+  .event-card .countdown-value {
+    font-size: 1.55rem;
   }
 
-  .countdown-label {
-    font-size: 0.62rem;
+  .event-card .countdown-label {
+    font-size: 0.65rem;
+  }
+
+  .music-button {
+    width: 48px;
+    height: 48px;
+    right: 14px;
+    bottom: 14px;
+    font-size: 1.2rem;
   }
 }
