@@ -387,38 +387,6 @@ footer {
   text-decoration: underline;
 }
 
-/* Botón de música */
-.music-button {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 100;
-
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 2px solid #000;
-
-  background: linear-gradient(180deg, #ffd21a 0%, #ff9d00 100%);
-  color: #000;
-  font-size: 1.35rem;
-  cursor: pointer;
-
-  box-shadow: 0 4px 0 #000, 0 8px 16px rgba(0,0,0,0.35);
-  transition: all 0.3s ease;
-}
-
-.music-button:hover {
-  transform: translateY(-2px);
-  background: #ffffff;
-  box-shadow: 0 4px 0 #000, 0 0 18px rgba(255, 210, 26, 0.8);
-}
-
-.music-button.playing {
-  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
-  color: #ffffff;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .title-section h1 { 
@@ -476,13 +444,5 @@ footer {
 
   .event-card .countdown-label {
     font-size: 0.65rem;
-  }
-
-  .music-button {
-    width: 48px;
-    height: 48px;
-    right: 14px;
-    bottom: 14px;
-    font-size: 1.2rem;
   }
 }
