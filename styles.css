@@ -118,7 +118,7 @@ header {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  background: linear-gradient(180deg, #ff8a00 0%, #ff6a00 55%, #f24a00 100%);
+  background: linear-gradient(180deg, #ff8a00 0%, #ff6a00 45%, #f24a00 100%);
   box-shadow: 0 0 24px rgba(0,0,0,0.35);
   padding-bottom: 25px;
 }
@@ -185,7 +185,7 @@ header {
   padding: 25px 15px;
   border: 2px solid #ffffff;
   border-radius: 12px;
-  background: linear-gradient(180deg, #1d2a5a 0%, #14204a 100%);
+  background: linear-gradient(180deg, #fff4c7 0%, #ffd86b 100%);
   box-shadow: 0 6px 20px rgba(0,0,0,0.35);
   transition: transform 0.3s ease;
 }
@@ -197,16 +197,16 @@ header {
 .event-type {
   font-weight: 800;
   font-size: 1.1rem;
-  color: var(--color-secundario);
+  color: var(--color-acento-rojo);
   margin-bottom: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0 #000;
+  text-shadow: 1px 1px 0 #ffffff;
 }
 
 .event-time {
   font-size: 1rem;
-  color: #ffffff;
+  color: #111111;
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -214,7 +214,7 @@ header {
 .event-location {
   font-style: italic;
   font-size: 0.95rem;
-  color: #ffffff;
+  color: #3a2200;
   margin-bottom: 20px;
   line-height: 1.6;
   white-space: pre-line;
@@ -227,15 +227,15 @@ header {
   border-radius: 50px;
   font-weight: 800;
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #000;
   transition: all 0.3s ease;
   margin: 5px auto;
   display: inline-block;
   min-width: 200px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 5px 0 #000, 0 8px 16px rgba(0,0,0,0.35);
   text-transform: uppercase;
   text-decoration: none;
-  background: linear-gradient(180deg, #ff7a00 0%, #e71919 100%);
+  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
   color: #ffffff;
   letter-spacing: 0.5px;
   text-shadow: 1px 1px 0 #000;
@@ -245,7 +245,7 @@ header {
   background: linear-gradient(180deg, #ffd21a 0%, #ff9d00 100%);
   color: #000;
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(255, 210, 26, 0.75);
+  box-shadow: 0 5px 0 #000, 0 0 20px rgba(255, 210, 26, 0.75);
   text-shadow: none;
 }
 
@@ -263,8 +263,8 @@ header {
 /* ---- FOOTER CON DISEÑO DE MARKETING ---- */
 footer {
   padding: 25px 20px 18px;
-  background: linear-gradient(0deg, #0c1637 0%, #172453 100%);
-  border-top: 2px solid rgba(255, 210, 26, 0.35);
+  background: linear-gradient(0deg, #000 0%, #161616 100%);
+  border-top: 2px solid var(--color-secundario);
   margin-top: 0;
 }
 
@@ -273,11 +273,11 @@ footer {
   text-align: center;
   margin-bottom: 18px;
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 210, 26, 0.2);
+  border-bottom: 1px solid rgba(255, 210, 26, 0.25);
 }
 
 .footer-promo p {
-  color: #ffffff;
+  color: #ffe7b3;
   font-size: 0.9rem;
   margin: 0 0 15px;
 }
@@ -309,7 +309,7 @@ footer {
 .footer-copyright {
   text-align: right;
   font-size: 11px;
-  color: #c5c8d8;
+  color: #b8b8b8;
   max-width: 1000px;
   margin: 0 auto;
 }
