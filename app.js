@@ -1,7 +1,7 @@
 const EVENT_DATE_TEXT = 'Lunes 18 de Mayo';
 
 // Fecha del evento: 18 de mayo de 2026
-// En JavaScript: enero = 0, mayo = 4
+// Mes en JavaScript: enero = 0, mayo = 4
 const EVENT_DATE = new Date(2026, 4, 18, 0, 0, 0);
 
 function setFixedDate() {
@@ -62,39 +62,9 @@ function updateCountdown() {
   }
 }
 
-function initMusicButton() {
-  const music = document.getElementById('backgroundMusic');
-  const button = document.getElementById('musicToggle');
-
-  if (!music || !button) {
-    return;
-  }
-
-  button.addEventListener('click', function() {
-    if (music.paused) {
-      music.play()
-        .then(() => {
-          button.textContent = '⏸️';
-          button.classList.add('playing');
-          button.setAttribute('aria-label', 'Pausar música');
-        })
-        .catch(() => {
-          button.textContent = '🎵';
-          button.classList.remove('playing');
-          button.setAttribute('aria-label', 'Reproducir música');
-        });
-    } else {
-      music.pause();
-      button.textContent = '🎵';
-      button.classList.remove('playing');
-      button.setAttribute('aria-label', 'Reproducir música');
-    }
-  });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   setFixedDate();
   updateCountdown();
+
   setInterval(updateCountdown, 1000);
-  initMusicButton();
 });
