@@ -256,11 +256,11 @@ header {
 /* Cuenta Regresiva */
 .event-card .countdown-container {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(70px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   width: 100%;
-  max-width: 520px;
-  margin: 22px auto 12px;
+  max-width: 420px;
+  margin: 20px auto 10px;
   align-items: stretch;
 }
 
@@ -272,16 +272,16 @@ header {
 
   background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
   border: 2px solid #000;
-  border-radius: 14px;
-  padding: 14px 8px;
+  border-radius: 12px;
+  padding: 12px 4px;
 
-  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.28);
-  min-height: 86px;
+  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.25);
+  min-width: 0;
 }
 
 .event-card .countdown-value {
   display: block;
-  font-size: 2rem;
+  font-size: 1.65rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1;
@@ -290,12 +290,12 @@ header {
 
 .event-card .countdown-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   font-weight: 800;
   color: #ffd21a;
-  margin-top: 8px;
+  margin-top: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-shadow: 1px 1px 0 #000;
 }
 
@@ -428,21 +428,22 @@ footer {
   }
 
   .event-card .countdown-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-width: 280px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    max-width: 100%;
   }
 
   .event-card .countdown-item {
-    padding: 12px 6px;
-    min-height: 78px;
+    padding: 10px 2px;
+    border-radius: 10px;
   }
 
   .event-card .countdown-value {
-    font-size: 1.55rem;
+    font-size: 1.25rem;
   }
 
   .event-card .countdown-label {
-    font-size: 0.65rem;
+    font-size: 0.5rem;
+    letter-spacing: 0;
   }
 }
