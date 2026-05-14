@@ -27,14 +27,15 @@ body {
   line-height: 1.5;
 }
 
-/* Header estilo Julianchis */
+/* Header */
 header {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: linear-gradient(180deg, rgba(11,11,11,0.96), rgba(0,0,0,0.98));
+  background: linear-gradient(180deg, #ff8a00 0%, #ff6a00 100%);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255, 210, 26, 0.65);
+  border-bottom: 3px solid #ffd21a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.28);
 }
 
 .header-content {
@@ -61,27 +62,28 @@ header {
   width: 120px;
   height: 34px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #111, #2b2b2b);
+  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
   padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 210, 26, 0.85);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.55);
+  border: 2px solid #ffd21a;
+  box-shadow: 0 3px 0 #000, 0 6px 12px rgba(0,0,0,0.35);
   transition: all 0.3s ease;
 }
 
 .logo:hover {
-  box-shadow: 0 0 14px rgba(255, 210, 26, 0.7);
-  border-color: var(--color-secundario);
+  box-shadow: 0 3px 0 #000, 0 0 14px rgba(255, 210, 26, 0.8);
+  border-color: #ffffff;
 }
 
 .logo-text {
-  color: white;
+  color: #ffffff;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 16px;
   letter-spacing: -0.02em;
+  text-shadow: 1px 1px 0 #000;
 }
 
 .social-links {
@@ -97,16 +99,18 @@ header {
   width: 32px;
   height: 32px;
   border-radius: 6px;
-  background: transparent;
-  border: 1px solid var(--color-secundario);
+  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
+  border: 2px solid #ffd21a;
   transition: transform 0.2s ease;
-  color: var(--color-secundario);
+  color: #ffffff;
+  box-shadow: 0 2px 0 #000;
 }
 
 .social-link:hover {
   transform: translateY(-2px);
-  background: rgba(255, 210, 26, 0.15);
-  box-shadow: 0 0 10px rgba(255, 210, 26, 0.45);
+  background: linear-gradient(180deg, #ffd21a 0%, #ff9d00 100%);
+  color: #000;
+  box-shadow: 0 2px 0 #000, 0 0 10px rgba(255, 210, 26, 0.65);
 }
 
 .social-icon {
@@ -260,64 +264,68 @@ header {
   padding: 0 10px;
 }
 
-/* ---- FOOTER CON DISEÑO DE MARKETING ---- */
+/* Footer */
 footer {
   padding: 25px 20px 18px;
-  background: linear-gradient(0deg, #000 0%, #161616 100%);
-  border-top: 2px solid var(--color-secundario);
+  background: linear-gradient(180deg, #ff6a00 0%, #e71919 100%);
+  border-top: 3px solid #ffd21a;
   margin-top: 0;
+  box-shadow: inset 0 4px 12px rgba(0,0,0,0.22);
 }
 
-/* Sección Promocional Centrada */
 .footer-promo {
   text-align: center;
   margin-bottom: 18px;
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 210, 26, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .footer-promo p {
-  color: #ffe7b3;
+  color: #ffffff;
   font-size: 0.9rem;
   margin: 0 0 15px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.45);
 }
 
-/* Botón Outline para venta */
 .btn-cotizar {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 10px 25px;
-  border: 1px solid var(--color-secundario);
+  border: 2px solid #000;
   border-radius: 50px;
-  color: var(--color-secundario);
+  color: #000;
+  background: linear-gradient(180deg, #ffd21a 0%, #ff9d00 100%);
   text-decoration: none;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.25);
 }
 
 .btn-cotizar:hover {
-  background: var(--color-secundario);
+  background: #ffffff;
   color: #000;
-  box-shadow: 0 0 15px rgba(255, 210, 26, 0.65);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #000, 0 0 15px rgba(255, 210, 26, 0.75);
 }
 
-/* Copyright alineado a la derecha como el original */
 .footer-copyright {
   text-align: right;
   font-size: 11px;
-  color: #b8b8b8;
+  color: #ffffff;
   max-width: 1000px;
   margin: 0 auto;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.45);
 }
 
 .footer-copyright a {
   color: #ffd21a;
   text-decoration: none;
   transition: color 0.2s;
+  font-weight: 600;
 }
 
 .footer-copyright a:hover {
@@ -327,19 +335,41 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .title-section h1 { font-size: 2rem; }
-  .event-date { font-size: 1rem; padding: 12px 0; }
+  .title-section h1 { 
+    font-size: 2rem; 
+  }
+
+  .event-date { 
+    font-size: 1rem; 
+    padding: 12px 0; 
+  }
   
-  /* En móviles, centrar el copyright para que se vea mejor */
   .footer-copyright {
     text-align: center;
   }
 }
 
 @media (max-width: 480px) {
-  .title-section h1 { font-size: 1.8rem; }
-  .map-button { min-width: 160px; padding: 12px 20px; font-size: 0.85rem; }
-  .header-content { padding: 10px 12px; }
-  .logo { width: 100px; height: 30px; }
-  .logo-text { font-size: 14px; }
+  .title-section h1 { 
+    font-size: 1.8rem; 
+  }
+
+  .map-button { 
+    min-width: 160px; 
+    padding: 12px 20px; 
+    font-size: 0.85rem; 
+  }
+
+  .header-content { 
+    padding: 10px 12px; 
+  }
+
+  .logo { 
+    width: 100px; 
+    height: 30px; 
+  }
+
+  .logo-text { 
+    font-size: 14px; 
+  }
 }
