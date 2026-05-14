@@ -253,6 +253,49 @@ header {
   text-shadow: none;
 }
 
+/* Cuenta Regresiva */
+.countdown-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px auto 10px;
+  max-width: 420px;
+}
+
+.countdown-item {
+  background: linear-gradient(180deg, #ff3b3b 0%, #e71919 100%);
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 12px 6px;
+  box-shadow: 0 4px 0 #000, 0 8px 14px rgba(0,0,0,0.25);
+}
+
+.countdown-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffd21a;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.countdown-message {
+  margin-top: 18px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #e71919;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+
 .confirmation-message {
   font-family: 'Parisienne', cursive;
   font-size: 1.6rem;
@@ -371,5 +414,22 @@ footer {
 
   .logo-text { 
     font-size: 14px; 
+  }
+
+  .countdown-container {
+    gap: 8px;
+  }
+
+  .countdown-item {
+    padding: 10px 4px;
+    border-radius: 10px;
+  }
+
+  .countdown-value {
+    font-size: 1.35rem;
+  }
+
+  .countdown-label {
+    font-size: 0.62rem;
   }
 }
