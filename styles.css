@@ -1,18 +1,17 @@
 :root {
-  --color-primario: #ff6a00;
-  --color-secundario: #ffb300;
+  --color-primario: #ff7a00;
+  --color-secundario: #ffd54a;
   --color-acento: #e53935;
-  --color-verde: #2ecc71;
+  --color-verde: #32d583;
 
   --color-fondo: #ff7a00;
-  --color-fondo-suave: #ff8c1a;
-  --color-fondo-oscuro: #b94c00;
+  --color-fondo-suave: #ff8f1f;
+  --color-fondo-oscuro: #0b1c4a;
+  --color-card: #102a63;
 
   --color-texto: #ffffff;
-  --color-texto-claro: #ffe7c2;
-  --color-sombra: rgba(0, 0, 0, 0.28);
-  --color-azul-profundo: #0b1c4a;
-  --color-azul-card: #102a63;
+  --color-texto-claro: #ffe8c2;
+  --color-sombra: rgba(0, 0, 0, 0.22);
 }
 
 * {
@@ -32,10 +31,10 @@ body {
   color: var(--color-texto);
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.12), transparent 20%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 18%),
-    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.06), transparent 22%),
-    linear-gradient(135deg, #ff6a00 0%, #ff7a00 28%, #ff8f1f 55%, #ff6a00 100%);
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.10), transparent 20%),
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.08), transparent 16%),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.05), transparent 22%),
+    linear-gradient(135deg, #ff6a00 0%, #ff7a00 36%, #ff8c1f 64%, #ff6a00 100%);
   background-size: 100% 100%, 100% 100%, 100% 100%, 220% 220%;
   animation: bgMove 14s ease-in-out infinite;
   position: relative;
@@ -47,37 +46,24 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 10% 18%, rgba(255, 255, 255, 0.09) 0 1px, transparent 2px),
-    radial-gradient(circle at 30% 55%, rgba(255, 255, 255, 0.09) 0 1px, transparent 2px),
-    radial-gradient(circle at 75% 28%, rgba(255, 255, 255, 0.09) 0 1px, transparent 2px),
-    radial-gradient(circle at 88% 72%, rgba(255, 255, 255, 0.09) 0 1px, transparent 2px),
-    radial-gradient(circle at 54% 84%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px);
-  opacity: 0.7;
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 30% 58%, rgba(255,255,255,0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 28%, rgba(255,255,255,0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 74%, rgba(255,255,255,0.08) 0 1px, transparent 2px);
+  opacity: 0.65;
   animation: starsFloat 8s ease-in-out infinite alternate;
   z-index: 0;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: -10%;
-  pointer-events: none;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.06) 0 10%, transparent 10% 22%, rgba(255,255,255,0.04) 22% 30%, transparent 30% 100%);
-  opacity: 0.25;
-  transform: skewY(-8deg);
-  z-index: 0;
-}
-
 @keyframes bgMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 @keyframes starsFloat {
   from { transform: translateY(0px); }
-  to   { transform: translateY(10px); }
+  to { transform: translateY(10px); }
 }
 
 header {
@@ -119,10 +105,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(255, 213, 74, 0.9);
+  border: 2px solid rgba(255, 213, 74, 0.95);
   background:
-    linear-gradient(135deg, rgba(13, 13, 13, 0.45), rgba(34, 34, 34, 0.1)),
-    radial-gradient(circle at top, rgba(255,255,255,0.16), transparent 60%);
+    linear-gradient(135deg, rgba(11, 28, 74, 0.35), rgba(11, 28, 74, 0.08));
   box-shadow: 0 8px 20px rgba(0,0,0,0.25), 0 0 14px rgba(255, 179, 0, 0.18);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
@@ -135,7 +120,6 @@ header {
 
 .logo-text {
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: 16px;
   letter-spacing: 0.01em;
@@ -195,7 +179,7 @@ header {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 35%, rgba(255, 230, 150, 0.16), transparent 26%),
+    radial-gradient(circle at 50% 35%, rgba(255, 230, 150, 0.14), transparent 26%),
     radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.08), transparent 18%),
     radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.08), transparent 18%);
   pointer-events: none;
@@ -242,7 +226,6 @@ header {
   margin: 0;
   font-size: 1.08rem;
   color: #fff7e7;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 
 .communion-image {
@@ -254,7 +237,7 @@ header {
   object-fit: cover;
   border: 4px solid rgba(255, 213, 74, 0.95);
   box-shadow:
-    0 0 0 6px rgba(229, 57, 53, 0.25),
+    0 0 0 6px rgba(229, 57, 53, 0.18),
     0 16px 36px rgba(0,0,0,0.32),
     0 0 30px rgba(255, 179, 0, 0.22);
   background: rgba(255,255,255,0.08);
@@ -269,13 +252,13 @@ header {
   border-top: 1px solid rgba(255, 213, 74, 0.7);
   border-bottom: 1px solid rgba(255, 213, 74, 0.7);
   background:
-    linear-gradient(90deg, rgba(0,0,0,0.0) 0%, rgba(255, 106, 0, 0.45) 18%, rgba(255, 179, 0, 0.55) 50%, rgba(255, 106, 0, 0.45) 82%, rgba(0,0,0,0.0) 100%),
-    linear-gradient(180deg, rgba(11, 28, 74, 0.55), rgba(11, 28, 74, 0.35));
+    linear-gradient(90deg, rgba(0,0,0,0.0) 0%, rgba(255, 106, 0, 0.22) 18%, rgba(255, 179, 0, 0.30) 50%, rgba(255, 106, 0, 0.22) 82%, rgba(0,0,0,0.0) 100%),
+    linear-gradient(180deg, rgba(11, 28, 74, 0.62), rgba(11, 28, 74, 0.42));
   margin: 18px auto 0;
   width: min(90%, 760px);
   letter-spacing: 1.1px;
   border-radius: 14px;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.18), 0 0 14px rgba(255, 179, 0, 0.16);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.18), 0 0 14px rgba(255, 179, 0, 0.12);
 }
 
 .event-card {
@@ -370,7 +353,7 @@ footer {
   padding: 30px 20px 22px;
   background:
     linear-gradient(0deg, rgba(11, 28, 74, 0.98), rgba(11, 28, 74, 0.84)),
-    linear-gradient(180deg, rgba(255, 106, 0, 0.55), rgba(229, 57, 53, 0.16));
+    linear-gradient(180deg, rgba(255, 106, 0, 0.28), rgba(229, 57, 53, 0.12));
   border-top: 2px solid rgba(255, 213, 74, 0.55);
   margin-top: 40px;
   position: relative;
@@ -417,7 +400,7 @@ footer {
 .footer-copyright {
   text-align: right;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.6);
   max-width: 1100px;
   margin: 0 auto;
 }
